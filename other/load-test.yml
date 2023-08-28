@@ -1,0 +1,12 @@
+# https://www.artillery.io/docs/reference/test-script
+
+config:
+  target: http://localhost
+  phases:
+    - duration: 8
+      arrivalRate: 100
+      name: Check if deployment happens without downtime
+scenarios:
+  - flow:
+    - get:
+        url: "/"

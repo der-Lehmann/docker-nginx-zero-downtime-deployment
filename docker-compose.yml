@@ -1,0 +1,25 @@
+name: 'zero-downtime-example'
+services:
+  web:
+    image: nginx
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+      - publicAssets:/var/www/public:ro
+    ports:
+      - "80:80"
+    depends_on:
+      - app
+
+  app:
+    image: ${APP_IMAGE}
+    volumes:
+      - publicAssets:/var/www/public
+
+  app_backup:
+    image: ${APP_IMAGE}
+    volumes:
+      - publicAssets:/var/www/public
+
+volumes:
+  publicAssets:
+    driver: local
